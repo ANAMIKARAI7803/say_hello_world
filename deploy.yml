@@ -1,0 +1,36 @@
+name: Deploy API to VM
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment when pushing to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAACFwAAAAdzc2gtcnNhAAAAAwEAAQAAAgEAxgXOTf/Ew+lHNqtJa9QXwXeRHIMOB0nrW4bil7uorucKHdzWf4n843WGUVZk5bTZz+S1QQm4pIYwCHghCdgohJzfbjnYzLkZAwP0pP0wwO6mV2oh6aAsZj72wAUKEapiZbGYuGWMYC0D45sviHeh2t4kiD6KGOJ8BndU8iGTxjV84Hqd+/k1hbuQZJV33E4CeGsQRFp8evvUf+c5MhaItFPO76zmmGqMme1O4a60i4+N9iAk64O4cTiZiQnCVTy6iJOX8BolcX+MRka0JjEac+K8JvJ4ZPP01vWJNcAvMGy3onZpf1SKUxGx4k1vizk3Wq52J6Y3xiAQp9Xp9b9in/6tmTwOtov7zHH4AjcPgLjNWMuv11SlGDvPdoP+OPmbazGr/pKDXQEPg8vp4oqq51vMcGzHMWMh8zkvCHKQn9fMpPns8J2LNyqgGdPgRtHvNHwVrEmenQjX4qgZdgHHxGfPgmFEfTCiaqHJV7zqu5TdrHCcSad3XUT7LtOXlSsVX+J/u2ngV0uFtXARPUMpuFFlORFbrZxjIRsEJxFfq4iELdYXoLfTEdcAaI3g/z+ouwwaDlyCSsqYwMdfdVm2RujC5c8FfFWI7+tMyGaaOU+yjO81P1x0E6eKS+87hpjXYVOa1y4XMS3gHWbgTYhOKfSET+3tm36QYsSmZrF7rBcAAAdY+ouasvqLmrIAAAAHc3NoLXJzYQAAAgEAxgXOTf/Ew+lHNqtJa9QXwXeRHIMOB0nrW4bil7uorucKHdzWf4n843WGUVZk5bTZz+S1QQm4pIYwCHghCdgohJzfbjnYzLkZAwP0pP0wwO6mV2oh6aAsZj72wAUKEapiZbGYuGWMYC0D45sviHeh2t4kiD6KGOJ8BndU8iGTxjV84Hqd+/k1hbuQZJV33E4CeGsQRFp8evvUf+c5MhaItFPO76zmmGqMme1O4a60i4+N9iAk64O4cTiZiQnCVTy6iJOX8BolcX+MRka0JjEac+K8JvJ4ZPP01vWJNcAvMGy3onZpf1SKUxGx4k1vizk3Wq52J6Y3xiAQp9Xp9b9in/6tmTwOtov7zHH4AjcPgLjNWMuv11SlGDvPdoP+OPmbazGr/pKDXQEPg8vp4oqq51vMcGzHMWMh8zkvCHKQn9fMpPns8J2LNyqgGdPgRtHvNHwVrEmenQjX4qgZdgHHxGfPgmFEfTCiaqHJV7zqu5TdrHCcSad3XUT7LtOXlSsVX+J/u2ngV0uFtXARPUMpuFFlORFbrZxjIRsEJxFfq4iELdYXoLfTEdcAaI3g/z+ouwwaDlyCSsqYwMdfdVm2RujC5c8FfFWI7+tMyGaaOU+yjO81P1x0E6eKS+87hpjXYVOa1y4XMS3gHWbgTYhOKfSET+3tm36QYsSmZrF7rBcAAAADAQABAAACAFmlyDu0lnpQ8k30JpWb27NY84dyZ1fyZYw2mP+zU872xrQ1RaBQsn2xN4E8OQprIQ6Gjm4mvgIxw64Z4G8p/lHnCRnIM3efNo0QbeGBxGAbyo+Ze0fenSsexyuwPFo6BjjeuXKFepMR3ghdOZww+MPyvJw3n+JbKmXtATZq8BEUJvgjWsF3lXz5KIn4xt4kLOciJSekxWUR/CZ5YgHkhLgKlw0Xe/+1gPiwn/z40EC8WTr7W2uJ4ubTBmMtWV6oUxRAqVDoLVpgMXuhR65gnYaoN6D0NYASl533Y8pDOrnUBiCVNfaQqdyojp0SjHR9jytM/y29CNP3sUKiS7xXDAjxAq1/6u+yZaBsgbbAkYuflIhP8Wo06CDc58KN0ESYwSQEA8neu6pTWeAaWZgi9Vn8dQb2B14f5fphrVym/Vu90p5zJtACG9hUKJoCzIC0aPc1wKas2o3ezVUIDZdnXy2vL7DTDKckZPKPr4VqGPBgVfJtLXKoJf5S1i4Pt5fdvmmPYMeTolmqRY7tcdS0yXbtbaGWMpT8k0J/X+xkK79XmKV/5DzCFj0opWh5Nq9cvuXFGW/mBORwPSgzsW7FYJZuEoDHAlTmvOSNTUQnYbsI9jdeubHZxdgpbJHzoWABun5GbRn4KaRYHxwzbHXk/tWpxP5g/bLBthH9dNZyXRuxAAABAQCTzI0I0WltwPrERwdqM8PwLldFuL9GDOfyzewFbSHrZQsGvnkPzNc95+1NAuq0htXJOOaZeciwMU5f4UiIhH+1falI4fnsu6Cv8WAwEUmhT0cilwoZ9OPCbpn9DjkwGa6OZnXmvSJG0jAwRwMG+JD7JxBRlpl8nv1G7CLjoD4QfAmJnBwG9W9qLOEt1BL7MJRJoVlJHaH440yKcaLNOavvE8Xri4Qy6qu4tmuw+pWOvS04DApdn9POOZS3TN2lhrRJW69ILApA+eDvGrN6AWgvQXqYDtmTHIzssyxqbn2ik8noOgyS4CM4yKiSVMsUOchq/omoNgPd/jiy2IMPam/+AAABAQD3uSd3y1Hp/Bpqs10l6F52oSVC4ugiCp5dFokKUKyrYCWymmEEeGVmMpbsm1DV/FsH/cEGk0l/Tfaj4e8U22qkEKRnosK05cy6kF5iLp3ESO1ea9epN5IqRdihxC3PpyerEKWeg9mgd3zRTdvd8+tAN7PQH88IpliKlamARY/H/iVyzN0ogNErYvYInH/5MbM1/M4Ek7oWCoSzYHme6FvjneuytX3uTBQnXUafVbN/Dje5F1Weowg2DnnT3YqywXW5xzeB6Ups9MKwxmoelvbJ3bNIWl3IUtr8A3f1njroCKuyVTCvgmAhoAqCU9QeOfReVUSucU6LHpWtPCaOZipHAAABAQDMo4yBVVkIi1+TCK8S0MmyE8RCMUSvWqZHsKLX6hcGJd3NqGowmw+Q2jHeBQMjcc8gLeVUm0xpp0w9OYtYEsssxKZb+vyRaPuqnChkLosXjJO9B+x9A/gn2pwS/FCoAOBl4VzlAv+Kl81nrmUS36+E0nhIaKKXLvFrU3MTyuQgRAmE/H+6UEd/55TCHvNJ6C5BvBQysnKenrdLR03TlgT5tCO377AJFGmW4tkNEwYtjU+44l1+Fqrq+5t0Yl8cdpgVcq9WJb437WD3kfTjeK8v4t5UMK5kGAYpU5tObtkNkAmC9REBXXuQaoFkVo1/UNS9n26GwEXdD0aw7bNYi4exAAAAG2FycGl0Z3VwdGEwMDA5MEBleGFtcGxlLmNvbQECAwQFBgc= }}
+
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Copy project files to VM
+        run: |
+          ssh -o StrictHostKeyChecking=no azureuser@48.217.232.174 "mkdir -p ~/say-hello-api"
+          scp -o StrictHostKeyChecking=no -r ./* azureuser@48.217.232.174:~/say-hello-api
+
+      - name: Restart server on VM
+        run: |
+          ssh -o StrictHostKeyChecking=no azureuser@48.217.232.174 "cd ~/say-hello-api && pm2 restart server.js || pm2 start server.js"
+
+      - name: Clean up
+        run: |
+          ssh -o StrictHostKeyChecking=no azureuser@48.217.232.174 "cd ~/say-hello-api && pm2 save"
